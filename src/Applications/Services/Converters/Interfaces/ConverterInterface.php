@@ -7,7 +7,7 @@ interface ConverterInterface
 
     public function unserialize(string $string): array;
 
-    public function serialize(array $details): string;
+    public function serialize(array $data): string;
 
     /**
      * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface

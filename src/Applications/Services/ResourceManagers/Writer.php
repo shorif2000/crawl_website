@@ -19,9 +19,9 @@ class Writer implements WriterInterface
         $this->converter = $converter;
     }
 
-    public function write(array $details): void
+    public function write(array $data): void
     {
-        $string = $this->converter->serialize($details);
+        $string = $this->converter->serialize($data);
         $this->file->store($string);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Applications\Services\Files\File;
-use App\Applications\Services\Containers\Details;
+use App\Applications\Services\Containers\Meta;
 use App\Applications\Services\Converters\HtmlConverter;
 use App\Applications\Services\Converters\JsonConverter;
 use App\Applications\Services\ResourceManagers\Reader;
@@ -20,11 +20,12 @@ class DomCrawlerCommand extends Command
 {
     protected static $defaultName = 'app:dom-crawler';
 
+
     protected function configure()
     {
         $this
-            ->setDescription('Dom Crawler of Videx')
-            ->addArgument('url', InputArgument::OPTIONAL, 'url of Videx')
+            ->setDescription('Capture products off Videx')
+            ->addArgument('url', InputArgument::REQUIRED, 'url of Videx')
         ;
     }
 
@@ -32,18 +33,21 @@ class DomCrawlerCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $url = $input->getArgument('url');
-
-        if ($url) {
-            $jsonFile = 'converted/videx.json';
-            $io->note(sprintf('You passed an url of Videx: %s', $url));
-            $detailsContainer = new Details();
-            $detailsContainer->addDetails(new Reader(new File($url), new HtmlConverter()));
-            $detailsContainer->sortByPrice();
-            $detailsContainer->saveDetails(new Writer(new File($jsonFile, new Filesystem()), new JsonConverter()));
-            $io->success('Json File is in ~/'.$jsonFile);
-        } else {
-            $io->warning('Missing url. Please add a valid url of Videx');
+        
+        if (preg_match( '/^(http|https):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}'.'((:[0-9]{1,5})?\\/.*)?$/i' ,$url) !== 1) {
+            $io->error('Not a valid URL');
+            return 1;
         }
+        
+        $jsonFile = 'output/videx.json';
+        $io->note(sprintf('You passed an url of Videx: %s', $url));
+
+        $metaContainer = new Meta();
+        $metaContainer->addMeta(new Reader(new File($url), new HtmlConverter(), $io));
+        $metaContainer->sortByPrice();
+        $metaContainer->saveMeta(new Writer(new File($jsonFile, new Filesystem()), new JsonConverter()));
+        $io->success('Json File is in ~/'.$jsonFile);
+
 
         return 0;
     }

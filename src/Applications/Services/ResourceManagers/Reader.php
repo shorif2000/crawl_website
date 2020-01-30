@@ -11,7 +11,7 @@ class Reader implements ReaderInterface
 {
     private $file;
 
-    private $converter;
+    private $converter;    
 
     public function __construct(FileInterface $file, ConverterInterface $converter)
     {
@@ -22,7 +22,7 @@ class Reader implements ReaderInterface
     public function read(): array
     {
         try {
-            $content = $this->file->fetch($this->converter);
+            $content = $this->file->fetch($this->converter);           
             return $this->converter->unserialize($content);
         } catch (\Exception $exception) {
             return [];

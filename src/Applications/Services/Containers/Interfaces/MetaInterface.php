@@ -5,14 +5,14 @@ namespace App\Applications\Services\Containers\Interfaces;
 use App\Applications\Services\ResourceManagers\Interfaces\ReaderInterface;
 use App\Applications\Services\ResourceManagers\Interfaces\WriterInterface;
 
-interface DetailsInterface
+interface MetaInterface
 {
 
-    public function addDetails(ReaderInterface $reader): void;
+    public function addMeta(ReaderInterface $reader): void;
 
-    public function saveDetails(WriterInterface $writer): void;
+    public function saveMeta(WriterInterface $writer): void;
 
     public function sortByPrice(): void;
 
-    public function getDetails(): array;
+    public function getMeta(): array;
 }

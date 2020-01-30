@@ -5,19 +5,21 @@ namespace App\Applications\Services\Converters;
 
 use App\Applications\Services\Converters\Interfaces\ConverterInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
+use Symfony\Component\Serializer\Encoder\JsonDecode;
 
 class JsonConverter implements ConverterInterface
 {
     public function unserialize(string $string): array
     {
-        // @TODO: Implement unserialize() method.
+        $jsonDecoder = new JsonDecode();
+        return $jsonDecoder->decode($string);
     }
 
-    public function serialize(array $details): string
+    public function serialize(array $data): string
     {
         $array = [];
 
-        foreach ($details as $key => $value) {
+        foreach ($data as $key => $value) {
             $array[] = [
                 'title' => $value->getOptionTitle(),
                 'description' => $value->getDescription(),

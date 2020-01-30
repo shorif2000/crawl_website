@@ -8,6 +8,7 @@ use App\Applications\Services\Parsers\HtmlParser;
 use App\Entity\VidexEntity;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpClient\CurlHttpClient;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 class HtmlConverter implements ConverterInterface
 {
@@ -23,11 +24,9 @@ class HtmlConverter implements ConverterInterface
         $array = [];
 
         $crawler = new Crawler($content);
-
         foreach ($crawler->filter('div > .package') as $domElement) {
             $videx = new VidexEntity();
             $htmlParser = new HtmlParser(new Crawler($domElement));
-
             $videx->setOptionTitle($htmlParser->title());
             $videx->setDescription($htmlParser->description());
             $videx->setPrice($htmlParser->price());
@@ -39,8 +38,9 @@ class HtmlConverter implements ConverterInterface
         return $array;
     }
 
-    public function serialize(array $details): string
+    public function serialize(array $data): string
     {
-        // @TODO: Implement serialize() method.
+        $jsonEncoder = new JsonEncode();
+        return $jsonEncoder->encode($data, 'json');
     }
 }

@@ -8,7 +8,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class HtmlParser implements ParserInterface
 {
-    private Crawler $htmlDom;
+    private $htmlDom;
 
     public function __construct(Crawler $htmlDom)
     {

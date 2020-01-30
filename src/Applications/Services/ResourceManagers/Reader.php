@@ -9,9 +9,9 @@ use App\Applications\Services\ResourceManagers\Interfaces\ReaderInterface;
 
 class Reader implements ReaderInterface
 {
-    private FileInterface $file;
+    private $file;
 
-    private ConverterInterface $converter;
+    private $converter;
 
     public function __construct(FileInterface $file, ConverterInterface $converter)
     {

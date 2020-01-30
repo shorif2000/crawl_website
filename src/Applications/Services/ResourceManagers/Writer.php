@@ -9,9 +9,9 @@ use App\Applications\Services\ResourceManagers\Interfaces\WriterInterface;
 
 class Writer implements WriterInterface
 {
-    private FileInterface $file;
+    private $file;
 
-    private ConverterInterface $converter;
+    private $converter;
 
     public function __construct(FileInterface $file, ConverterInterface $converter)
     {

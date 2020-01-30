@@ -11,7 +11,7 @@ class File implements FileInterface
 {
     private $source = '';
 
-    private ?Filesystem $filesystem;
+    private $filesystem;
 
     public function __construct(string $source, Filesystem $filesystem = null)
     {

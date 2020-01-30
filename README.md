@@ -28,7 +28,6 @@ Run following command to execute
 php bin/console app:dom-crawler https://videx.comesconnected.com
 ```
 
-Example json output
 
 ## Running the tests
 
@@ -37,7 +36,7 @@ Tests are run using phpunit
 To run tests execute
 
 ```
-phpunit
+./vendor/bin/simple-phpunit tests/
 ```
 
 ## License

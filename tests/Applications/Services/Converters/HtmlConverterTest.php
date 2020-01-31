@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Tests\Applications\Services\Parsers;
 
 use App\Applications\Services\Converters\HtmlConverter;

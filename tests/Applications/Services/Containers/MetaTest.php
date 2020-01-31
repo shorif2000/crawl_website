@@ -69,10 +69,8 @@ class MetaTest extends TestCase
         $this->assertEquals($expected, $first->getPrice());
     }
 
-    /**
-     * @return array
-     */
-    public function provider()
+
+    public function provider() : array
     {
         $videx1 = new VidexEntity();
         $videx1->setOptionTitle('First Title');

@@ -36,7 +36,7 @@ Tests are run using phpunit
 To run tests execute
 
 ```
-./vendor/bin/simple-phpunit tests/
+./vendor/bin/simple-phpunit --bootstrap config/bootstrap.php tests/
 ```
 
 ## License
